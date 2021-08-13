@@ -857,6 +857,10 @@ bool FreeCADDialog::init_start_python() {
     exec_var->pyin << "set_font_dir([\"/usr/share/fonts/\",\"~/.fonts/\"])" << std::endl;
     // also add 
 #endif
+#ifdef __FreeBSD__
+    exec_var->pyin << "set_font_dir([\"/usr/local/share/fonts/\",\"~/.fonts/\"])" << std::endl;
+    // also add 
+#endif
 
     return true;
 }
