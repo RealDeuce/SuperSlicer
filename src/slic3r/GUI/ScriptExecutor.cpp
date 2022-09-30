@@ -6,6 +6,7 @@
 #include "libslic3r/Print.hpp"
 
 #include <string>
+#include <boost/filesystem/string_file.hpp>
 
 #include <angelscript/source/as_config.h>
 #include <angelscript/add_on/autowrapper/aswrappedcall.h>
