@@ -137,6 +137,7 @@ std::string platform_flavor_to_string(PlatformFlavor pf)
         case PlatformFlavor::LinuxOnChromium : return "LinuxOnChromium";
         case PlatformFlavor::WSL             : return "WSL";
         case PlatformFlavor::WSL2            : return "WSL2";
+        case PlatformFlavor::FreeBSD         : return "FreeBSD";
         case PlatformFlavor::OpenBSD         : return "OpenBSD";
         case PlatformFlavor::GenericOSX      : return "GenericOSX";
         case PlatformFlavor::OSXOnX86        : return "OSXOnX86";
