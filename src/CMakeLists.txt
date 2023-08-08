@@ -141,7 +141,7 @@ if (NOT WIN32)
     set_target_properties(Slic3r PROPERTIES OUTPUT_NAME "${SLIC3R_APP_CMD}")
 endif ()
 
-target_link_libraries(Slic3r libslic3r cereal)
+target_link_libraries(Slic3r libslic3r)
 
 if (APPLE)
 #    add_compile_options(-stdlib=libc++)
