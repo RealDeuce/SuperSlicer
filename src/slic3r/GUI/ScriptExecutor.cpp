@@ -6,7 +6,7 @@
 #include "libslic3r/Print.hpp"
 
 #include <string>
-#include <boost/filesystem/string_file.hpp>
+#include <iterator>
 
 #include <angelscript/source/as_config.h>
 #include <angelscript/add_on/autowrapper/aswrappedcall.h>
@@ -620,6 +620,12 @@ void as_back_custom_initial_value(int preset_type, std::string& key) {
 
 /////// main script fucntions //////
 
+static std::string get_file_string(const std::string& str)
+{
+  std::ifstream ifs(str);
+  return std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+}
+
 //TODO: add "unset" function, that revert to last value (befoer a scripted set) if a set has been made since last not-scripted change.
 void ScriptContainer::init(const std::string& tab_key, Tab* tab)
 {
@@ -724,8 +730,7 @@ void ScriptContainer::init(const std::string& tab_key, Tab* tab)
         // Let the builder load the script, and do the necessary pre-processing (include files, etc)
         //res = builder.AddSectionFromFile(ui_script_file.string().c_str()); //seems to be problematic on cyrillic locale
         {
-            std::string all_file;
-            boost::filesystem::load_string_file(ui_script_file, all_file);
+            std::string all_file {get_file_string(ui_script_file.string())};
             res = builder.AddSectionFromMemory(ui_script_file.string().c_str(), all_file.c_str(), (unsigned int)(all_file.length()), 0);
         }
         if (res < 0) throw CompileErrorException("Error, can't build the script for tab " + tab_key);
