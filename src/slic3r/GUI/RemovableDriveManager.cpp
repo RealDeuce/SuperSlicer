@@ -20,9 +20,12 @@
 #include <sys/stat.h>
 #include <glob.h>
 #include <pwd.h>
+#include <boost/version.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/system/error_code.hpp>
-#include <boost/filesystem/convenience.hpp>
+#if BOOST_VERSION < 108600
+#include <boost/filesystem/convenience.hpp>Q
+#endif
 #include <boost/process.hpp>
 #endif
 
