@@ -27,11 +27,6 @@ elseif (OpenCASCADE_VERSION VERSION_GREATER_EQUAL 8.0.0)
 endif ()
 
 set(OCCT_LIBS
-    TKXDESTEP
-    TKSTEP
-    TKSTEP209
-    TKSTEPAttr
-    TKSTEPBase
     TKXCAF
     TKXSBase
     TKVCAF
@@ -55,6 +50,20 @@ set(OCCT_LIBS
     TKernel
 )
 
+if (OpenCASCADE_VERSION VERSION_LESS 7.8.0)
+    list(APPEND OCCT_LIBS
+        TKXDESTEP
+        TKSTEP
+        TKSTEP209
+        TKSTEPAttr
+        TKSTEPBase
+    )
+else()
+    list(APPEND OCCT_LIBS
+        TKDESTEP
+        TKXSDRAWSTEP
+    )
+endif()
 target_include_directories(OCCTWrapper PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(OCCTWrapper PUBLIC ${OpenCASCADE_INCLUDE_DIR})
 target_link_directories(OCCTWrapper PUBLIC ${OpenCASCADE_LIBRARY_DIR})
