@@ -3,7 +3,7 @@ if (WIN32)
 elseif (APPLE)
     set(HIDAPI_IMPL mac/hid.c)
 elseif (CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
-	set(HIDAPI_IMPL libusb/hid.c)
+    set(HIDAPI_IMPL freebsd/hid.c)
 else ()
     # Assume Linux or Unix other than Mac OS
     set(HIDAPI_IMPL linux/hid.c)
