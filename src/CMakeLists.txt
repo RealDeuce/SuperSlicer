@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.13)
 project(Slic3r-native)
 
 add_subdirectory(build-utils)
+if (NOT APPLE AND NOT CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+    add_subdirectory(test-utils)
+endif ()
 add_subdirectory(admesh)
 add_subdirectory(avrdude)
 # boost/nowide

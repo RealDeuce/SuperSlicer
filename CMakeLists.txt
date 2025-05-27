@@ -242,7 +242,6 @@ if (APPLE)
 endif ()
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
-
     find_package(PkgConfig REQUIRED)
 
     if (CMAKE_VERSION VERSION_LESS "3.1")
@@ -486,7 +485,9 @@ include_directories(BEFORE SYSTEM ${EIGEN3_INCLUDE_DIR})
 # no matter what.
 find_package(EXPAT REQUIRED)
 
-#add_library(libexpat INTERFACE)
+if (NOT CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+add_library(libexpat INTERFACE)
+endif ()
 
 if (TARGET EXPAT::EXPAT )
     target_link_libraries(libexpat INTERFACE EXPAT::EXPAT)
