@@ -340,11 +340,9 @@ static void CustomGLDebugOutput(GLenum source, GLenum type, unsigned int id, GLe
 bool OpenGLManager::init_gl()
 {
     if (!m_gl_initialized) {
-#if ENABLE_GL_CORE_PROFILE || ENABLE_OPENGL_ES
         glewExperimental = true;
-#endif // ENABLE_GL_CORE_PROFILE || ENABLE_OPENGL_ES
         GLenum err = glewInit();
-        if (err != GLEW_OK) {
+        if (err != GLEW_OK && err != GLEW_ERROR_NO_GLX_DISPLAY) {
             BOOST_LOG_TRIVIAL(error) << "Unable to init glew library: " << glewGetErrorString(err);
             return false;
         }
@@ -454,6 +452,11 @@ wxGLContext* OpenGLManager::init_glcontext(wxGLCanvas& canvas)
         attrs.PlatformDefaults().ES2().MajorVersion(2).EndList();
         m_context = new wxGLContext(&canvas, nullptr, &attrs);
 #elif ENABLE_GL_CORE_PROFILE
+        if (!m_context->SetCurrent(&canvas)) {
+            BOOST_LOG_TRIVIAL(error) << "Unable to make GLContext Current";
+        } else {
+            BOOST_LOG_TRIVIAL(info) << "made GLContext Current OK";
+        }
         m_debug_enabled = enable_debug;
 
         const int gl_major = required_opengl_version.first;

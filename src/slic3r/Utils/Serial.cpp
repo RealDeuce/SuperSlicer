@@ -54,7 +54,7 @@
 	#include <sys/select.h>
 #endif
 
-#if defined(__APPLE__) || defined(__OpenBSD__)
+#if defined(__APPLE__) || defined(__OpenBSD__) || defined(__FreeBSD__)
 	#include <termios.h>
 #elif defined __linux__
 	#include <fcntl.h>
@@ -234,7 +234,7 @@ std::vector<SerialPortInfo> scan_serial_ports_extended()
                 const auto path = dir_entry.path().string();
                 SerialPortInfo spi;
                 spi.port = path;
-#ifdef __linux__
+#if __linux__
 				auto friendly_name = sysfs_tty_prop(name, "product");
 				if (friendly_name) {
 					spi.is_printer = looks_like_printer(*friendly_name);
