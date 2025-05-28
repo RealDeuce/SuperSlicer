@@ -23,6 +23,6 @@ jobs:
             ls -lah
             whoami
             env | sort
-            env ASSUME_ALWAYS_YES=yes pkg install -y at-spi2-core boost boost-libs cairo cereal cgal curl dbus expat gdk-pixbuf2 gettext-runtime gettext-tools glew glib gmp gtk3 harfbuzz hidapi Imath jpeg-turbo libbgcode libGLU libglvnd libiconv mpfr nlopt onetbb opencascade openvdb pango pkgconf png qhull tiff wx32-gtk3 xorgproto
+            sudo env ASSUME_ALWAYS_YES=yes pkg install -y at-spi2-core boost boost-libs cairo cereal cgal curl dbus expat gdk-pixbuf2 gettext-runtime gettext-tools glew glib gmp gtk3 harfbuzz hidapi Imath jpeg-turbo libbgcode libGLU libglvnd libiconv mpfr nlopt onetbb opencascade openvdb pango pkgconf png qhull tiff wx32-gtk3 xorgproto
             pkg info | wc -l
             pkg info | sort
