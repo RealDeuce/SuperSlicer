@@ -32,6 +32,7 @@ jobs:
             mkdir _build _install
             cd _build
             export VERBOSE=1
+            export CMAKE_PREFIX_PATH="/usr/local"
             cmake -DCMAKE_INSTALL_PREFIX=/home/runner/nanosvg/_install ..
             cmake --build .
             cmake --install .
