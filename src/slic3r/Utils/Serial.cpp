@@ -234,7 +234,7 @@ std::vector<SerialPortInfo> scan_serial_ports_extended()
                 const auto path = dir_entry.path().string();
                 SerialPortInfo spi;
                 spi.port = path;
-#if __linux__
+#ifdef __linux__
 				auto friendly_name = sysfs_tty_prop(name, "product");
 				if (friendly_name) {
 					spi.is_printer = looks_like_printer(*friendly_name);
